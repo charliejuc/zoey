@@ -1,0 +1,77 @@
+version: "2"
+
+services:
+        django_cv:
+            build: ./django/
+            depends_on:
+                - postgresql
+            volumes:
+                - ./django/app/:/custom_vote/
+                - ./media/:/custom_vote/media/
+                - ./static/:/custom_vote/static/
+            restart: unless-stopped
+            networks:
+                - cv_network
+        #DBS
+        postgresql:
+            image: paintedfox/postgresql
+            volumes:
+                - postgres_cv/:/data
+                - ./postgresql_conf/main:/etc/postgresql/9.3/main
+            environment:
+                - USER=super
+                - PASS=root
+            restart: unless-stopped
+            networks:
+                - cv_network
+
+        #NODE
+        node_cp:    
+            build: ./node/custom_poll/
+            volumes:
+                - ./node/custom_poll/app/:/custom_poll/
+                - ./media/:/custom_poll/media/
+            environment:
+                - UNO_PATH=/opt/openoffice4/
+            restart: unless-stopped
+            networks:
+                - cv_network
+        frontend:    
+            build: ./frontend/
+            ports:
+                - "8080:8080"
+            volumes:
+                - ./static/:/static/
+                - ./frontend/init_app.sh:/init_app.sh
+                - ./django/app/templates/:/templates/
+            networks:
+                - cv_network
+
+        #SERVERS
+        nginx:
+            build: nginx/
+            ports:
+                - "80:80"
+            depends_on:
+                - node_cp
+                - django_cv
+            volumes:
+                - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+                - ./nginx/conf.d/:/etc/nginx/conf.d
+                - ./nginx/apt/sources.list:/etc/apt/sources.list
+                - ./nginx/letsencrypt/:/etc/letsencrypt/        
+                - ./static/:/static/
+                - ./media/:/media/
+            restart: unless-stopped
+            networks:
+                - cv_network
+
+volumes:
+    postgres_cv:
+
+networks:
+    cv_network:
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.10.11.1/22
