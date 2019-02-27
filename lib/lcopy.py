@@ -11,6 +11,10 @@ shutil_copy = shutil.copy
 def zcopy(from_path, new_path, *args, **kwargs):
 	fbe = get_files_by_ext(from_path, *args, **kwargs)
 
+	zcopy_fbe(fbe, from_path, new_path, *args, **kwargs)
+
+
+def zcopy_fbe(fbe, from_path, new_path, *args, **kwargs):
 	zmakedirs(new_path)
 
 	for ext, files in fbe.items():
