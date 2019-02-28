@@ -18,14 +18,16 @@ def get_files_by_ext(directory, exclude=list(), *args, **kwargs):
 	empty_str = ''
 
 	def exclude_full_path_root(l, root, exclude):
-		root_slash = root + '/'
-
 		_l = remove_excluded(
 			(path_join(root, e) for e in l), 
 			exclude
 		)
 
-		return [ re_sub(root_slash, empty_str, e) for e in _l ]
+		slash = '/'
+		if not root.endswith(slash):
+			root += slash
+
+		return [ re_sub(root, empty_str, e) for e in _l ]
 
 	for root, dirs, files in os.walk(directory, topdown=True):
 		dirs[:] = exclude_full_path_root(dirs, root, exclude)

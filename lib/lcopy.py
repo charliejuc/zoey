@@ -11,6 +11,9 @@ shutil_copy = shutil.copy
 def zcopy(from_path, new_path, *args, **kwargs):
 	fbe = get_files_by_ext(from_path, *args, **kwargs)
 
+	if not new_path.endswith('/'):
+		new_path += '/'
+
 	zcopy_fbe(fbe, from_path, new_path, *args, **kwargs)
 
 
@@ -19,7 +22,7 @@ def zcopy_fbe(fbe, from_path, new_path, *args, **kwargs):
 
 	for ext, files in fbe.items():
 		for root, filename in files:
-			new_root = re_sub(from_path, new_path, root)			
+			new_root = re_sub(from_path, new_path, root)
 
 			zmakedirs(new_root)
 
