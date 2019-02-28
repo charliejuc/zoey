@@ -16,10 +16,16 @@ def show_parser_help_if_needed(parser, help_index):
 	except IndexError:
 		pass
 
-allowed_tasks = [ 'cp' ]
-
-parent_parser = argparse.ArgumentParser(description='Help with common project tasks', add_help=False)
-parent_parser.add_argument('task', type=str, choices=allowed_tasks, help='Select task to do')
+parent_parser = argparse.ArgumentParser(
+	description='Help with common project tasks', 
+	add_help=False
+)
+parent_parser.add_argument(
+	'task',
+	type=str, 
+	choices=settings.allowed_tasks, 
+	help='Select task to do'
+)
 
 help_index = 1
 show_parser_help_if_needed(parent_parser, help_index)
@@ -48,7 +54,13 @@ if args.task == 'cp':
 		r'.*/postgresql.*'
 	]
 
-	zcopy(from_path, new_path, exclude=custom_exclude, exclude_conf=args.exclude_conf)
+	zcopy(
+		from_path,
+		new_path,
+		exclude=custom_exclude,
+		exclude_conf=args.exclude_conf
+	)
+
 
 # from pprint import pprint
 # import os, json

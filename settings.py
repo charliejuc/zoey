@@ -1,3 +1,5 @@
+allowed_tasks = [ 'cp' ]
+
 excluded = {
 	'node': [ 
 		r'.*/node_modules',
