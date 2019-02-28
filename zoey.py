@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from lib.lcopy import zcopy
-import argparse, sys
+import argparse, sys, settings
 
 def show_parser_help(parser):
 	parser.print_help()
@@ -34,7 +34,8 @@ if args.task == 'cp':
 		'--exclude-conf', 
 		type=str,
 		default='node',
-		help='New project folder'
+		help='Exclude files and folders with existing config separated by ":" options: {{{choices}}}'\
+				.format(choices=','.join(key for key in settings.excluded.keys()))
 	)
 
 	args = cp_parser.parse_args()
