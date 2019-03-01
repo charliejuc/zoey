@@ -36,16 +36,16 @@ task = get_task(args.task)
 
 task(parent_parser)
 
-
+# from utils.cjson import write_json_file, read_json_file
 # from pprint import pprint
-# import os, json
 
-# with open('zoey.json', 'w') as file:
-# 	file.write(json.dumps(fbe))
+# write_json_file('zoey.json', { 
+# 	'exclude': [
+# 		r'.*/checksum_package\.txt$',
+# 		r'.*/postgresql.*'
+# 	]
+# }, json_dumps={ 'indent': 4 })
 
-# file_path = os.path.join(cache['json'][1][0], cache['json'][1][1])
+# json_data = read_json_file('zoey.json')
 
-# with open(file_path, 'rb') as f:
-# 	package_json = json.load(f)
-
-# 	pprint(package_json)
+# pprint(json_data)

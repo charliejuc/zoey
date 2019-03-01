@@ -1,4 +1,5 @@
 allowed_tasks = [ 'cp' ]
+json_conf_file = 'zoey.json'
 
 excluded = {
 	'node': [ 
