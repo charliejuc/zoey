@@ -11,10 +11,24 @@ path_join = os.path.join
 re_sub = re.sub
 
 def get_files_by_ext(directory, exclude=list(), *args, **kwargs):
+	json_file = read_zoey_json_file(directory)
+
 	exclude_conf = kwargs.get('exclude_conf')
-	json_file_exclude = read_zoey_json_file().get('exclude')
+	json_file_exclude_conf = json_file.get('exclude_conf')
+	json_file_exclude = json_file.get('exclude')
 
 	if exclude_conf:
+		if json_file_exclude_conf:
+			exclude_conf = '{exclude_conf}:{json_file_exclude_conf}'\
+				.format(
+					exclude_conf=exclude_conf,
+					json_file_exclude_conf=json_file_exclude_conf
+				)
+
+		exclude += get_excluded(exclude_conf)
+
+	elif json_file_exclude_conf:
+		exclude_conf = json_file_exclude_conf
 		exclude += get_excluded(exclude_conf)
 
 	if json_file_exclude:

@@ -7,14 +7,19 @@ def dict_list_append(d, key, to_append):
 		d[key].append(to_append)
 
 
-def get_joined_dict_lists(_dict, key, sep):
+def get_joined_dict_lists(_dict, key, sep, unique=True):
 	try:
 		return _dict[key]
 
 	except KeyError:
 		excluded = list()
 
-		for key in key.split(sep):
+		keys = key.split(sep)
+
+		if unique:
+			keys = set(keys)
+
+		for key in keys:
 			excluded += _dict[key]
 
 		return excluded
