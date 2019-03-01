@@ -35,17 +35,3 @@ args = parent_parser.parse_known_args()[0]
 task = get_task(args.task)
 
 task(parent_parser)
-
-# from utils.cjson import write_json_file, read_json_file
-# from pprint import pprint
-
-# write_json_file('zoey.json', { 
-# 	'exclude': [
-# 		r'.*/checksum_package\.txt$',
-# 		r'.*/postgresql.*'
-# 	]
-# }, json_dumps={ 'indent': 4 })
-
-# json_data = read_json_file('zoey.json')
-
-# pprint(json_data)

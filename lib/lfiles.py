@@ -2,6 +2,8 @@ from utils.cre import remove_excluded
 from utils.cdict import dict_list_append
 from utils.cfiles import get_excluded
 
+from lib.ljson import read_zoey_json_file
+
 import os, re
 
 splitext = os.path.splitext
@@ -10,9 +12,13 @@ re_sub = re.sub
 
 def get_files_by_ext(directory, exclude=list(), *args, **kwargs):
 	exclude_conf = kwargs.get('exclude_conf')
+	json_file_exclude = read_zoey_json_file().get('exclude')
 
 	if exclude_conf:
 		exclude += get_excluded(exclude_conf)
+
+	if json_file_exclude:
+		exclude += json_file_exclude
 
 	fbe = dict()
 	empty_str = ''

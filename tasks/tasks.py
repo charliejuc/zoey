@@ -20,15 +20,9 @@ def copy(parent_parser):
 	from_path = args.from_path
 	new_path = args.to_path
 
-	custom_exclude = [
-		r'.*/checksum_package\.txt$',
-		r'.*/postgresql.*'
-	]
-
 	zcopy(
 		from_path,
 		new_path,
-		exclude=custom_exclude,
 		exclude_conf=args.exclude_conf
 	)
 
