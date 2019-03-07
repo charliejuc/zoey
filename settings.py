@@ -1,4 +1,7 @@
-allowed_tasks = [ 'cp' ]
+allowed_tasks = [ 
+	'cp', 
+	'help'
+]
 json_conf_file = 'zoey.json'
 
 excluded = {

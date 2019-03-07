@@ -1,6 +1,9 @@
 from utils.cdict import get_joined_dict_lists
 
-import settings
+import os, settings
+
+abspath = os.path.abspath
+dirname = os.path.dirname
 
 s_excluded = settings.excluded
 excluded_sep = ':'
@@ -23,3 +26,6 @@ def read_file(file_path, binary=False):
 
 	with open(file_path, mode) as file:
 		return file.read()
+
+def full_dir(path):
+	return abspath(dirname(path))
