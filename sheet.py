@@ -5,11 +5,14 @@ from pprint import pprint
 from utils.ctime import speed_test
 
 # import shlex
-from utils.cos import run_cmd
+from lib.lcommand import zcmd_func
 
 
+func_cmd = """update_json_file(/var/www/html/clients/example_web/node/app/project-conf/conf.json, {
+	"database": { "database": "example" }
+});"""
 
-pprint(run_cmd('ls', stdout=None))
+zcmd_func(func_cmd, '')
 
 
 # print(cmd_ask_if_needed("docker-compose exec postgresql bash -c \"su postgres -c 'createdb <{?db_name}>'\""))
