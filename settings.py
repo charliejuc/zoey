@@ -1,6 +1,6 @@
 allowed_tasks = [ 
-	'cp', 
-	'help'
+	'cp',
+	'command'
 ]
 json_conf_file = 'zoey.json'
 

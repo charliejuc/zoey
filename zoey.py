@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from tasks.tasks import get_task
 
 import argparse, sys, settings
