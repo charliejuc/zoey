@@ -31,7 +31,7 @@ def copy(parent_parser):
 	)
 
 def command(parent_parser):
-	c_parser = argparse.ArgumentParser('commands', parents=[parent_parser])
+	c_parser = argparse.ArgumentParser('command', parents=[parent_parser])
 
 	c_parser.add_argument(
 		'command_name', 
