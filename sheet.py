@@ -8,11 +8,9 @@ from utils.ctime import speed_test
 from lib.lcommand import zcmd_func
 
 
-func_cmd = """update_json_file(/var/www/html/clients/example_web/node/app/project-conf/conf.json, {
-	"database": { "database": "example" }
-});"""
+func_cmd = """update_json_file('node/app/project-conf/conf.json', '{
+	"database": { "database": "example", "username": "cacatua1" }
+}');"""
+
 
 zcmd_func(func_cmd, '/var/www/html/clients/example_web')
-
-
-# print(cmd_ask_if_needed("docker-compose exec postgresql bash -c \"su postgres -c 'createdb <{?db_name}>'\""))
