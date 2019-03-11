@@ -26,13 +26,25 @@ def zcmd(cmd, directory, need_pipe=False):
 	run_cmd(parsed_cmd, **_kwargs)
 
 
-from utils.cjson import update_json_file
-import json
+from utils.cjson import update_ordered_json_file
+import json, os
 
+func_resolv = {
+	'str': str,
+	'json_str': json.loads
+}
 allowed_funcs = {
-	'update_json_file': (update_json_file, ( str, json.loads ))
+	'update_json_file': (update_ordered_json_file, ( 'path', 'json_str' ))
 }
 def zcmd_func(funcs, directory, need_pipe=False):
+	def path_resolv(directory):
+		def pr(_path):
+			return os.path.join(directory, _path)
+
+		return pr
+
+	func_resolv['path'] = path_resolv(directory)
+
 	def get_func_name(func):
 		return re.search(r'^[a-zA-Z_]+', func).group()
 
@@ -54,7 +66,7 @@ def zcmd_func(funcs, directory, need_pipe=False):
 	for pf in parsed_funcs:
 		af = allowed_funcs[get_func_name(pf)]
 		func = af[0]
-		args_parsers = af[1]
+		args_parsers = ( func_resolv[parser_key] for parser_key in af[1] )
 		args = get_func_args(pf)
 
 		for i, parser in enumerate(args_parsers):

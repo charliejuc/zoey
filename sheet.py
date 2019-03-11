@@ -12,7 +12,7 @@ func_cmd = """update_json_file(/var/www/html/clients/example_web/node/app/projec
 	"database": { "database": "example" }
 });"""
 
-zcmd_func(func_cmd, '')
+zcmd_func(func_cmd, '/var/www/html/clients/example_web')
 
 
 # print(cmd_ask_if_needed("docker-compose exec postgresql bash -c \"su postgres -c 'createdb <{?db_name}>'\""))
