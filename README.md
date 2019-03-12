@@ -74,7 +74,7 @@ Run bash or zoey commands to set up your project.
 ```
 
 #### Command variables
-When type a command you can use variables for zoey to ask for values, variables looks like this **"<{?variable_name}>"**, for example: "<{?db_name}>"
+When type a command you can use variables for zoey ask for values, variables looks like this **"<{?variable_name}>"**, for example: "<{?db_name}>"
 
 #### Add custom commands
 **zoey.json:**
@@ -87,9 +87,9 @@ When type a command you can use variables for zoey to ask for values, variables 
     			"info": "Build containers"
     		},
     		{
-			"func_cmd": "update_json_file('node/app/project-conf/conf.json', '{ \"database\": { \"database\": \"<{?db_name}>\" } }');",
-			"info": "Set 'node/app/project-conf/conf.json' config"
-		},
+				"func_cmd": "update_json_file('node/app/project-conf/conf.json', '{ \"database\": { \"database\": \"<{?db_name}>\" } }');",
+				"info": "Set 'node/app/project-conf/conf.json' config"
+			},
     		{
     			"cmd": "docker-compose up -d",
     			"info": "Run containers"
@@ -130,4 +130,4 @@ Allows run zoey functions. Always wrap function arguments with single quotes.
 
 ##### ZOEY FUNCTIONS
 
-**update_json_file(file_path, json_data):** Update json file with passed values, this function only includes new value, it never removes existing values.
+**update_json_file(file_path, json_data):** Update json file with passed values, this function only includes new values or update indicated values, it never removes existing values.
