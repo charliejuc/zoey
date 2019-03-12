@@ -1,13 +1,13 @@
-#ZOEY
-##Copy
+# ZOEY
+## Copy
 It allows copy old project excluding unnecesary files or folders.
 
-###Usage
+### Usage
 ```bash
 ./zoey.py cp [-h] [-excnf EXCLUDE_CONF] from_path to_path
 ```
 
-####Exclude conf
+#### Exclude conf
 ```bash
 --exclude-conf -excnf
 ```
@@ -65,18 +65,18 @@ And type your custom regexp to exclude.
 }
 ```
 
-##Commands
+## Commands
 Run bash or zoey commands to set up your project.
 
-###Usage
+### Usage
 ```bash
 ./zoey.py command [-h] [--project-dir PROJECT_DIR] command_name
 ```
 
-####Command variables
+#### Command variables
 When type a command you can use variables for zoey to ask for values, variables looks like this **"<{?variable_name}>"**, for example: "<{?db_name}>"
 
-####Add custom commands
+#### Add custom commands
 **zoey.json:**
 ```json
 {
@@ -108,7 +108,7 @@ When type a command you can use variables for zoey to ask for values, variables 
 
 ```
 
-#####CMD
+##### CMD
 Allows run bash scripts.
 
 ```json
@@ -118,7 +118,7 @@ Allows run bash scripts.
 }
 ```
 
-#####FUNCTION CMD
+##### FUNCTION CMD
 Allows run zoey functions. Always wrap function arguments with single quotes.
 
 ```json
@@ -128,6 +128,6 @@ Allows run zoey functions. Always wrap function arguments with single quotes.
 }
 ```
 
-#####ZOEY FUNCTIONS
+##### ZOEY FUNCTIONS
 
 **update_json_file(file_path, json_data):** Update json file with passed values, this function only includes new value, it never removes existing values.
