@@ -27,7 +27,7 @@ def ask_if_needed(string, regexp, clean_variable=lambda s: s):
 		return string
 
 	bars = ( ( match, clean_variable(match) ) for match in set(matches) )
-	enter_bar_str = 'Enter {bar}:'
+	enter_bar_str = 'Enter {bar}'
 	enter_bar_format = (enter_bar_str + ': ').format
 	enter_bar_default_format = (enter_bar_str + ' (default: {default}): ').format
 
