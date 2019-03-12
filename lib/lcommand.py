@@ -82,14 +82,11 @@ def zcmd_func(funcs, directory, need_pipe=False):
 		func(*args)
 
 
-def run_zcmd(cmd_obj, directory):
-	need_pipe = cmd_obj.get('pipe', False)
-	print(cmd_obj.get('info', ''))
-	cmd = cmd_obj.get('cmd')
-	func_cmd = cmd_obj.get('func_cmd')
-
-	if cmd is None and func_cmd is None:
-		raise Exception('"cmd" or "func_cmd" is required.')
+def run_zcmd(cmd_dict, directory):
+	need_pipe = cmd_dict.get('pipe', False)
+	print(cmd_dict.get('info', ''))
+	cmd = cmd_dict.get('cmd')
+	func_cmd = cmd_dict.get('func_cmd')
 
 	if cmd:
 		return zcmd(cmd, directory, need_pipe=need_pipe)
@@ -101,9 +98,21 @@ def zcommands(command_name, directory):
 	json_file = read_zoey_json_file(directory)
 	commands = json_file.get('commands', dict())
 
-	if not commands:
-		print('There are no commands')
-		sys.exit(0)
+	def validate(commands):
+		if not commands:
+			print('There are no commands')
+			sys.exit(0)
 
-	for cmd in commands[command_name]:
-		run_zcmd(cmd, directory)
+		if not commands.get(command_name):
+			print('Command "{name}" not found'.format(name=command_name))
+			sys.exit(1)
+
+		for cmd_dict in commands[command_name]:
+			if cmd_dict.get('cmd') is None and cmd_dict.get('func_cmd') is None:
+				print(cmd_dict)
+				raise Exception('"cmd" or "func_cmd" is required.')
+
+	validate(commands)
+
+	for cmd_dict in commands[command_name]:
+		run_zcmd(cmd_dict, directory)
