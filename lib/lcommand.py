@@ -1,8 +1,10 @@
 from lib.ljson import read_zoey_json_file
+from lib.lyaml import update_docker_compose_file as update_dc_file
 
 from utils.cos import run_cmd
 from utils.cre import ask_if_needed
 from utils.cjson import update_ordered_json_file
+from utils.cyaml import update_yaml_file
 
 import sys, re, json, os 
 
@@ -36,8 +38,11 @@ func_resolv = {
 	'json_str': json.loads
 }
 allowed_funcs = {
-	'update_json_file': (update_ordered_json_file, ( 'path', 'json_str' ))
+	'update_json_file': (update_ordered_json_file, ( 'path', 'json_str' )),
+	'update_dc_file': (update_dc_file, ( 'path', 'json_str' )),
+	'update_yaml_file': (update_yaml_file, ( 'path', 'json_str' ))
 }
+
 args_split_regexp = r"(\')[\s]*,[\s]*(\')"
 func_name_regexp = r'^[a-zA-Z_]+'
 def zcmd_func(funcs, directory, need_pipe=False):
