@@ -39,9 +39,24 @@ def read_docker_compose_file(file_path, *args, **kwargs):
 
 
 def update_docker_compose_file(file_path, updated_data, *args, **kwargs):
+	def dc_parse(yaml_file, updated_data):
+		new_updated_data = dict()
+
+		for key, _data in updated_data.items():
+			if not yaml_file.get(key):
+				if not new_updated_data.get('services'):
+					new_updated_data['services'] = {}
+
+				new_updated_data['services'][key] = _data
+				continue
+
+			new_updated_data[key] = _data
+
+		return new_updated_data
+
 	yaml_file = read_docker_compose_file(file_path, *args, **kwargs)
 
-	include_update(yaml_file, updated_data)
+	include_update(yaml_file, dc_parse(yaml_file, updated_data))
 
 	write_docker_compose_file(file_path, yaml_file, *args, **kwargs)
 
