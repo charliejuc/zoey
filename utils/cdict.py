@@ -25,6 +25,12 @@ def get_joined_dict_lists(_dict, key, sep, unique=True):
 		return excluded
 
 
+def dict_to_str_equals(_dict):
+	equal_format = '{key}={value}'.format
+
+	return [ equal_format(key=key, value=value) for key, value in _dict.items() ]
+
+
 # Include values from updated_data keeping actual values
 # Example:
 # a = {
