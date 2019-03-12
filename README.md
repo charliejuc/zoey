@@ -11,7 +11,7 @@ It allows copy old project excluding unnecesary files or folders.
 ```bash
 --exclude-conf -excnf
 ```
-This configuration user values from **excluded** variable in settings.py.
+This configuration use values from **excluded** variable in settings.py.
 
 ```python
 excluded = {
