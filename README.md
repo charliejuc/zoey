@@ -74,7 +74,7 @@ Run bash or zoey commands to set up your project.
 ```
 
 #### Command variables
-When type a command you can use variables for zoey ask for values, variables looks like this **"<{?variable_name}>"**, for example: "<{?db_name}>"
+When type a command you can use variables for zoey ask for values, variables looks like this **"<{?variable_name}>"**, for example: "<{?db_name}>". Zoey has a **variable cache** and when you type the same variable name several times, use cache value, whether no value is provided, by default.
 
 #### Add custom commands
 **zoey.json:**
@@ -130,4 +130,6 @@ Allows run zoey functions. Always wrap function arguments with single quotes.
 
 ##### ZOEY FUNCTIONS
 
-**update_json_file(file_path, json_data):** Update json file with passed values, this function only includes new values or update indicated values, it never removes existing values.
+- **update_json_file(file_path, json_data):** Update json file with passed values, this function only includes new values or update indicated values, it never removes existing values.
+- **update_yaml_file(file_path, json_data):** The same as **update_json_file** but for **yaml** files.
+- **update_dc_file(file_path, json_data):** The same as **update_yaml_file** but for **docker-compose.yml** files. Avoid having to write **"services"** in json_data.
